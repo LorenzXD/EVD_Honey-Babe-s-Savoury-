@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HoneyBabe's Savory — Artisan Pastry Boutique</title>
+<link rel="icon" href="./LOGO.jpg" />
+<link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+<script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --beige:#f6eee1;
+    --beige-dark:#eaddc7;
+    --cream:#fffaf2;
+    --card:#fffdf8;
+    --light-orange:#ffb26b;
+    --light-orange-soft:#ffddb8;
+    --light-orange-deep:#f08a3c;
+    --maroon-light:#a66767;
+    --maroon:#7d4444;
+    --maroon-dark:#5a2e2e;
+    --ink:#4a3330;
+    --muted:#8a7370;
+    --shadow:0 12px 30px rgba(125,68,68,.12);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Quicksand',sans-serif;
+    background:var(--beige);
+    color:var(--ink);
+  }
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif}
+  a{color:inherit;text-decoration:none}
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 28px;
+    background:rgba(255,250,242,.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid #e8d6bd;
+  }
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{
+    width:52px;height:52px;border-radius:50%;
+    object-fit:cover;
+    border:2px solid var(--light-orange);
+    background:var(--maroon);
+    box-shadow:var(--shadow);
+  }
+  .brand b{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--maroon-dark);line-height:1}
+  .brand small{color:var(--maroon-light);letter-spacing:.18em;font-size:.68rem;font-weight:700}
+  .links{display:flex;gap:22px;font-weight:600;color:var(--maroon)}
+  .links a:hover{color:var(--light-orange-deep)}
+  .nav-actions{display:flex;gap:10px;align-items:center}
+  .btn{
+    border:none;cursor:pointer;font-family:inherit;font-weight:700;
+    padding:11px 20px;border-radius:999px;transition:.2s;
+  }
+  .btn-maroon{background:var(--maroon);color:#fff}
+  .btn-maroon:hover{background:var(--maroon-dark);transform:translateY(-1px)}
+  .btn-orange{background:var(--light-orange);color:var(--maroon-dark)}
+  .btn-orange:hover{background:var(--light-orange-deep);color:#fff}
+  .btn-outline{background:transparent;border:2px solid var(--maroon-light);color:var(--maroon)}
+  .cart-btn{position:relative}
+  #cart-count{
+    position:absolute;top:-6px;right:-6px;background:var(--light-orange-deep);
+    color:white;font-size:.75rem;min-width:22px;height:22px;border-radius:999px;
+    display:grid;place-items:center;font-weight:800;padding:0 5px;
+  }
+  /* HERO */
+  .hero{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:30px;
+    padding:46px 28px 30px;max-width:1180px;margin:0 auto;align-items:center;
+  }
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--cream);border:1px solid #e8d6bd;color:var(--maroon);
+    padding:8px 14px;border-radius:999px;font-weight:700;font-size:.85rem;
+  }
+  .pill .dot{width:9px;height:9px;border-radius:50%;background:#4caf6d;box-shadow:0 0 0 5px #4caf6d22}
+  .hero h1{font-size:3.3rem;line-height:.95;margin:18px 0 12px;color:var(--maroon-dark)}
+  .hero h1 em{font-style:italic;color:var(--light-orange-deep);font-weight:500}
+  .hero p{color:var(--muted);font-size:1.08rem;line-height:1.6;max-width:520px}
+  .hero-cta{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+  .stats{display:flex;gap:26px;margin-top:26px}
+  .stats b{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--maroon-dark)}
+  .stats span{font-size:.85rem;color:var(--muted);font-weight:600}
+  .hero-visual{position:relative}
+  .hero-img-main{
+    width:100%;height:480px;object-fit:cover;border-radius:28px;
+    box-shadow:var(--shadow);border:8px solid var(--cream);
+  }
+  .float-card{
+    position:absolute;background:var(--cream);border-radius:16px;box-shadow:var(--shadow);
+    padding:12px 14px;display:flex;gap:10px;align-items:center;border:1px solid #ecdcc3;
+  }
+  .float-card img{width:52px;height:52px;border-radius:12px;object-fit:cover}
+  .float-card b{font-size:.9rem}
+  .float-card small{color:var(--muted)}
+  #fc1{left:-18px;bottom:46px}
+  #fc2{right:-10px;top:28px}
+  /* MARQUEE */
+  .marquee{
+    background:var(--maroon);color:#ffe8c8;overflow:hidden;white-space:nowrap;
+    padding:11px 0;font-weight:700;letter-spacing:.08em;font-size:.9rem;margin-top:14px;
+  }
+  .marquee span{margin:0 18px}
+  /* SECTIONS */
+  section{max-width:1180px;margin:0 auto;padding:44px 28px}
+  .sec-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:20px}
+  .sec-head h2{font-size:2.3rem;margin:6px 0;color:var(--maroon-dark)}
+  .sec-head p{color:var(--muted);margin:0;max-width:520px}
+  .eyebrow{color:var(--light-orange-deep);font-weight:800;letter-spacing:.2em;font-size:.75rem;text-transform:uppercase}
+  /* FILTERS */
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:18px 0}
+  .chip{
+    border:1.5px solid #dcc3a6;background:var(--cream);padding:9px 16px;border-radius:999px;
+    font-weight:700;cursor:pointer;color:var(--maroon);transition:.2s;
+  }
+  .chip.active,.chip:hover{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+  #search{
+    margin-left:auto;padding:11px 16px;border-radius:999px;border:1.5px solid #dcc3a6;
+    background:var(--cream);min-width:240px;font-family:inherit;font-weight:600;color:var(--ink);
+  }
+  /* MENU GRID - rendered by PyScript */
+  #menu-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;
+  }
+  .card{
+    background:var(--card);border:1px solid #ecdcc3;border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow);transition:.25s;display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-4px)}
+  .card-img{position:relative;height:190px;overflow:hidden}
+  .card-img img{width:100%;height:100%;object-fit:cover}
+  .price-badge{
+    position:absolute;left:12px;bottom:12px;background:var(--maroon-dark);color:#ffe9c9;
+    padding:7px 12px;border-radius:999px;font-weight:800;
+  }
+  .cat-badge{
+    position:absolute;right:12px;top:12px;background:rgba(255,250,242,.92);
+    color:var(--maroon);padding:6px 11px;border-radius:999px;font-size:.75rem;font-weight:800;
+  }
+  .card-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .card-body h3{margin:0;font-size:1.18rem;color:var(--maroon-dark)}
+  .card-body p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.5;flex:1}
+  .card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+  .rating{font-weight:800;color:var(--light-orange-deep)}
+  .add-btn{
+    background:var(--light-orange);border:none;padding:10px 16px;border-radius:999px;
+    font-weight:800;cursor:pointer;color:var(--maroon-dark);
+  }
+  .add-btn:hover{background:var(--maroon);color:#fff}
+  /* CRAFT */
+  .craft{
+    background:linear-gradient(180deg,#fff6e8,var(--beige-dark));
+    border-radius:28px;padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:24px;
+    border:1px solid #e8d0ad;align-items:center;
+  }
+  .craft img{width:100%;height:340px;object-fit:cover;border-radius:20px}
+  .craft ul{list-style:none;padding:0;margin:16px 0;display:grid;gap:10px}
+  .craft li{background:var(--cream);border:1px solid #ecdcc3;padding:12px 14px;border-radius:14px}
+  /* TESTIMONIALS */
+  .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .testi{background:var(--cream);border:1px solid #ecdcc3;border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+  /* VISIT */
+  .visit{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .panel{background:var(--maroon);color:#ffedda;border-radius:22px;padding:26px}
+  .panel.light{background:var(--cream);color:var(--ink);border:1px solid #ecdcc3}
+  input,select,textarea{
+    width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid #dcc3a6;
+    font-family:inherit;font-weight:600;background:#fff;color:var(--ink);margin-top:6px;
+  }
+  label{font-weight:700;font-size:.88rem;margin-top:12px;display:block}
+  /* CART DRAWER */
+  #cart-drawer{
+    position:fixed;top:0;right:0;width:380px;max-width:92vw;height:100vh;
+    background:var(--cream);box-shadow:-18px 0 40px rgba(90,46,46,.2);
+    transform:translateX(105%);transition:.3s;z-index:80;display:flex;flex-direction:column;
+    border-left:1px solid #e8d6bd;
+  }
+  #cart-drawer.open{transform:none}
+  .cart-head{background:var(--maroon-dark);color:#ffe9c9;padding:18px;display:flex;justify-content:space-between;align-items:center}
+  #cart-items{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+  .cart-item{display:flex;gap:10px;background:#fff;border:1px solid #ecdcc3;border-radius:14px;padding:10px;align-items:center}
+  .cart-item img{width:56px;height:56px;border-radius:10px;object-fit:cover}
+  .qty{display:flex;align-items:center;gap:8px;margin-left:auto}
+  .qty button{width:28px;height:28px;border-radius:50%;border:1px solid #dcc3a6;background:var(--beige);cursor:pointer;font-weight:800}
+  .cart-foot{padding:16px;border-top:1px dashed #dcc3a6;background:#fff}
+  /* MODAL + TOAST */
+  #overlay{position:fixed;inset:0;background:rgba(90,46,46,.45);display:none;z-index:70}
+  #overlay.show{display:block}
+  #order-modal{
+    position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.96);opacity:0;pointer-events:none;
+    background:var(--cream);border-radius:22px;padding:26px;width:440px;max-width:92vw;z-index:90;transition:.25s;
+    border:1px solid #e8d6bd;box-shadow:var(--shadow);
+  }
+  #order-modal.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+  #toast{
+    position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;
+    background:var(--maroon-dark);color:#ffe9c9;padding:13px 20px;border-radius:999px;font-weight:700;
+    z-index:100;transition:.3s;box-shadow:var(--shadow);max-width:90vw;text-align:center;
+  }
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  #py-status{background:#fff3df;border:1px solid #e8d0ad;padding:10px 16px;border-radius:12px;font-size:.88rem;color:var(--maroon);max-width:1180px;margin:12px auto 0}
+  footer{background:var(--maroon-dark);color:#f7dcc0;padding:30px 28px;margin-top:30px}
+  .foot{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:20px}
+  @media(max-width:900px){
+    .hero,.craft,.visit{grid-template-columns:1fr}
+    .links{display:none}
+    .hero h1{font-size:2.5rem}
+    .hero-img-main{height:340px}
+    #fc1{left:8px}#fc2{right:8px}
+    .foot{grid-template-columns:1fr}
+    #search{margin-left:0;width:100%}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">
+    <img class="logo" src="./LOGO.jpg" alt="HoneyBabe's Savory logo" />
+    <div><b>HoneyBabe's Savory</b><br><small>ARTISAN PASTRY</small></div>
+  </div>
+  <div class="links">
+    <a href="#menu">Menu</a><a href="#craft">Our Craft</a><a href="#reviews">Reviews</a><a href="#visit">Visit Us</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn btn-outline" py-click="say_hello">Say Hi 👋</button>
+    <button class="btn btn-maroon cart-btn" py-click="open_cart">🧺 Cart <span id="cart-count">0</span></button>
+  </div>
+</nav>
+
+<div class="marquee">🥖 FRESH CROISSANTS &nbsp;•&nbsp; 🍰 BEIGE & BUTTER &nbsp;•&nbsp; 🍊 LIGHT ORANGE GLAZE &nbsp;•&nbsp; 🍷 LIGHT MAROON BERRY &nbsp;•&nbsp; BAKED HOURLY &nbsp;•&nbsp; <span>USE CODE: HONEYBEE10 FOR 10% OFF</span> •&nbsp; 🧁 &nbsp;•&nbsp; MUCH LOVE FROM HONEYBABE'S •</div>
+
+
+<header class="hero">
+  <div>
+    <div class="pill"><span class="dot"></span> Open today · 7:30am – 7pm · Beige Street Bakery</div>
+    <h1>Warm, buttery<br>happiness, <em>baked<br>with love.</em></h1>
+    <p>Small-batch pastries in beige, light orange & maroon tones — flaky croissants, glazed buns, berry tarts and cakes. Everything on this menu is rendered & served by    running right in your browser.</p>
+    <div class="hero-cta">
+      <a href="#menu" class="btn btn-maroon">Explore Menu 🍩</a>
+      <button class="btn btn-orange" py-click="open_cart">Order Pickup 🧺</button>
+    </div>
+    <div class="stats">
+      <div><b>48+</b><br><span>pastries daily</span></div>
+      <div><b>4.9 ★</b><br><span>2,300 reviews</span></div>
+      <div><b>100%</b><br><span>butter & love</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img class="hero-img-main" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=80" alt="Fresh croissants" />
+    <div class="float-card" id="fc2">
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=200&q=80" alt="cake" />
+      <div><b>Truffle Cake</b><br><small>⭐ 4.9 · $6.50</small></div>
+    </div>
+    <div class="float-card" id="fc1">
+      <img src="https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=200&q=80" alt="macarons" />
+      <div><b id="float-special">Pistachio Macarons</b></div>
+    </div>
+  </div>
+</header>
+
+<section id="menu">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">Our Menu</div>
+      <h2>Fresh from the oven</h2>
+    </div>
+  </div>
+  <div class="toolbar">
+    <button class="chip active" data-cat="All" py-click="set_filter">All</button>
+    <button class="chip" data-cat="Croissants" py-click="set_filter">Croissants</button>
+    <button class="chip" data-cat="Cakes" py-click="set_filter">Cakes</button>
+    <button class="chip" data-cat="Cookies" py-click="set_filter">Cookies</button>
+    <button class="chip" data-cat="Tarts" py-click="set_filter">Tarts</button>
+    <input id="search" placeholder="🔍 Search pastries…" py-input="search_menu" />
+  </div>
+  <div id="menu-grid"><!-- filled by Python --></div>
+</section>
+
+<section id="craft">
+  <div class="craft">
+    <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=800&q=80" alt="bakery craft" />
+    <div>
+      <div class="eyebrow">Beige · Light Orange · Light Maroon</div>
+      <h2 style="margin:8px 0;color:var(--maroon-dark)">Baked slow, glazed glow.</h2>
+      <p style="color:var(--muted)">Our palette is our recipe: warm beige dough, light-orange citrus glaze, light-maroon berry coulis.</p>
+      <ul>
+        <li>🥐 <b>Laminated 27 layers</b> — 3-day croissant process</li>
+        <li>🍊 <b>Light-orange glaze</b> — blood orange + apricot</li>
+        <li>🍇 <b>Light-maroon coulis</b> — raspberry, hibiscus, merlot cherry</li>
+      </ul>
+      <button class="btn btn-maroon" py-click="chef_surprise">✨ Ask Chef for surprise</button>
+      <p id="chef-output" style="background:var(--cream);border:1px dashed var(--maroon-light);padding:12px;border-radius:12px;margin-top:12px">Python chef is ready…</p>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="sec-head"><div><div class="eyebrow">Sweet words</div><h2>Loved by the neighborhood</h2></div></div>
+  <div class="testi-grid">
+    <div class="testi">⭐⭐⭐⭐⭐<p>“The orange-glazed morning bun tastes like sunshine. My kids fight over the last bite.”</p><b>— Maya R.</b></div>
+    <div class="testi">⭐⭐⭐⭐⭐<p>“Most beautiful beige bakery in town. The maroon berry tart is almost too pretty to eat.”</p><b>— Daniel K.</b></div>
+    <div class="testi">⭐⭐⭐⭐⭐<p>“Ordered via the site — Python checkout was instant and pickup was warm & ready.”</p><b>— Priya S.</b></div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="sec-head"><div><div class="eyebrow">Order & Visit</div><h2>Pickup or sweet delivery</h2></div></div>
+  <div class="visit">
+    <div class="panel">
+      <h3 style="margin-top:0">📍 HoneyBabe's Savory</h3>
+      <p>14 Beige Lane, Butter District<br>Open Mon–Sun · 7:30am – 7pm<br>☎️ (555) 014-2024</p>
+      <p style="background:#ffffff22;padding:12px;border-radius:12px">🎁 Code <b>HONEYBEE10</b> = 10% off, applied automatically by Python at checkout when your total is over $20.</p>
+      <h4>💌 Get fresh-bake alerts (Python validates!)</h4>
+      <div style="display:flex;gap:8px">
+        <input id="newsletter-email" placeholder="you@email.com" style="margin-top:0" />
+        <button class="btn btn-orange" py-click="subscribe_newsletter" style="white-space:nowrap">Join</button>
+      </div>
+      <p id="newsletter-msg" style="min-height:22px;font-weight:700"></p>
+    </div>
+    <div class="panel light">
+      <h3 style="margin-top:0;color:var(--maroon-dark)">🧾 Quick checkout preview</h3>
+      <p style="color:var(--muted)">Your cart total (computed live in Python):</p>
+      <h2 id="mini-total" style="font-size:2.6rem;margin:6px 0;color:var(--maroon-dark)">$0.00</h2>
+      <p id="mini-detail" style="color:var(--muted)">Cart is empty — add something flaky!</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-maroon" py-click="open_cart">Review Cart</button>
+        <button class="btn btn-outline" py-click="clear_cart">Clear</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <div><h3 style="margin:0">HoneyBabe's Savory 🥐</h3><p>Beige, light orange & light maroon pastry boutique. Built with PyScript — Python in the browser.</p></div>
+    <div><b>Hours</b><p>Mon–Fri 7:30–19:00<br>Sat–Sun 8:00–18:00</p></div>
+    <div><b>Contact</b><p>hello@honeybabe.shop<br>@honeybabe.savory</p></div>
+  </div>
+  <p style="text-align:center;opacity:.7;margin-top:20px">© 2026 HoneyBabe's Savory · Made by Team Galawgaw</p>
+</footer>
+
+<div id="overlay" py-click="close_all"></div>
+
+<aside id="cart-drawer">
+  <div class="cart-head"><b>🧺 Your Basket</b><button class="btn btn-orange" py-click="close_all" style="padding:7px 14px">Close ✕</button></div>
+  <div id="cart-items"></div>
+  <div class="cart-foot">
+    <div style="display:flex;justify-content:space-between;font-weight:800"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+    <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem"><span>Discount (HONEYBEE10)</span><span id="cart-discount">-$0.00</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:1.2rem;font-weight:800;color:var(--maroon-dark);margin:6px 0"><span>Total</span><span id="cart-total">$0.00</span></div>
+    <button class="btn btn-maroon" py-click="open_checkout" style="width:100%">Checkout →</button>
+  </div>
+</aside>
+
+<div id="order-modal">
+  <h3 style="margin-top:0;color:var(--maroon-dark)">Checkout 🧁</h3>
+  <p style="color:var(--muted);margin-top:0" id="checkout-summary">0 items</p>
+  <form id="order-form" py-submit="place_order">
+    <label>Name<input id="f-name" required placeholder="Honey Babe" /></label>
+    <label>Phone<input id="f-phone" required placeholder="(555) 000-0000" /></label>
+    <label>Pickup time
+      <select id="f-time"><option>ASAP (~15 min)</option><option>Today afternoon</option><option>Tomorrow morning</option></select>
+    </label>
+    <label>Notes<textarea id="f-notes" rows="2" placeholder="Extra glaze? Candle?"></textarea></label>
+    <div style="display:flex;gap:10px;margin-top:14px">
+      <button type="submit" class="btn btn-maroon" style="flex:1">Place Order </button>
+      <button type="button" class="btn btn-outline" py-click="close_all">Cancel</button>
+    </div>
+  </form>
+  <div id="order-success" style="display:none;text-align:center;padding:10px">
+    <div style="font-size:3rem">🎉</div>
+    <h3 style="color:var(--maroon-dark)">Order received!</h3>
+    <p id="order-success-text"></p>
+    <button class="btn btn-orange" py-click="close_all">Yay!</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script type="py" src="./main.py"></script>
+
+</body>
+</html>
