@@ -1,6 +1,7 @@
 from pyscript import document
 from pyodide.ffi import create_proxy
 import js
+import html
 import random
 import re
 
@@ -24,6 +25,7 @@ PRODUCTS = [
 cart = {}  # id -> qty
 active_cat = "All"
 search_q = ""
+_review_rating = 5
 
 # Hold JS proxies so the garbage collector never frees callbacks early.
 _held_proxies = []
@@ -83,7 +85,7 @@ def _later(fn, ms):
 # ---------- shop logic ----------
 
 def money(n):
-    return f"${n:.2f}"
+    return f"₱{n:.2f}"
 
 def show_toast(msg):
     t = _el("#toast")
@@ -120,13 +122,13 @@ def render_menu():
     _set_text("#menu-count", f"{len(items)} treat{'s' if len(items)!=1 else ''} · baked fresh today")
     if not items:
         try:
-            grid.innerHTML = "<div style='grid-column:1/-1;background:#fff;border:1px dashed var(--maroon-light);padding:28px;border-radius:16px;text-align:center'>😢 No pastries match — try clearing your search or tapping All.</div>"
+            grid.innerHTML = "<div style='grid-column:1/-1;background:#fff;border:1px dashed var(--maroon-light);padding:28px;border-radius:16px;text-align:center'><svg style='width:22px;height:22px;color:var(--maroon);vertical-align:-4px' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg> No pastries match — try clearing your search or tapping All.</div>"
         except Exception as err:
             js.console.warn(f"[HoneyBabe] render_menu failed: {err}")
         return
     html = ""
     for p in items:
-        badge = "<span class='best-badge'>⭐ BESTSELLER</span>" if p["rating"] >= 4.9 else ""
+        badge = "<span class='best-badge'><svg style='width:11px;height:11px;vertical-align:-1px' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor' stroke-width='1'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg> BESTSELLER</span>" if p["rating"] >= 4.9 else ""
         html += f"""
         <div class="card">
           <div class="card-img">
@@ -139,8 +141,8 @@ def render_menu():
             <h3>{p['name']}</h3>
             <p>{p['desc']}</p>
             <div class="card-foot">
-              <span class="rating">★ {p['rating']}</span>
-              <button class="add-btn" data-id="{p['id']}" py-click="add_to_cart" aria-label="Add {p['name']} to basket">Add +</button>
+              <span class="rating"><svg style="width:13px;height:13px;vertical-align:-2px;fill:currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> {p['rating']}</span>
+              <button class="add-btn" data-id="{p['id']}" py-click="add_to_cart" aria-label="Add {p['name']} to basket">Add <svg style="width:13px;height:13px;vertical-align:-2px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
             </div>
           </div>
         </div>
@@ -152,15 +154,13 @@ def render_menu():
 
 def cart_totals():
     sub = sum(next(p for p in PRODUCTS if p["id"]==pid)["price"]*qty for pid,qty in cart.items())
-    disc = round(sub*0.10,2) if sub >= 20 else 0.0
-    return sub, disc, sub-disc
+    return sub, 0.0, sub
 
 def update_cart_ui():
     count = sum(cart.values())
     _set_text("#cart-count", str(count))
     sub, disc, total = cart_totals()
     _set_text("#cart-subtotal", money(sub))
-    _set_text("#cart-discount", f"-{money(disc)}")
     _set_text("#cart-total", money(total))
     _set_text("#mini-total", money(total))
     box = _el("#cart-items")
@@ -169,11 +169,11 @@ def update_cart_ui():
     if not cart:
         _set_text("#mini-detail", "Cart is empty — add something flaky!")
         try:
-            box.innerHTML = "<div style='text-align:center;color:var(--muted);padding:30px'>🧺 Your basket is empty.<br>Add an ensaymada — you deserve it.<br><br><a href='#menu' style='font-weight:800;color:var(--maroon)'>Browse the menu →</a></div>"
+            box.innerHTML = "<div style='text-align:center;color:var(--muted);padding:30px'><svg style='width:30px;height:30px;color:var(--maroon-light)' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z'/><line x1='3' y1='6' x2='21' y2='6'/><path d='M16 10a4 4 0 0 1-8 0'/></svg><br>Your basket is empty.<br>Add an ensaymada — you deserve it.<br><br><a href='#menu' style='font-weight:800;color:var(--maroon)'>Browse the menu</a></div>"
         except Exception as err:
             js.console.warn(f"[HoneyBabe] update_cart_ui failed: {err}")
         return
-    _set_text("#mini-detail", f"{count} item(s) · {money(disc)} saved with HONEYBEE10 🎉" if disc else f"{count} item(s) · add {money(20-sub)} more for 10% off")
+    _set_text("#mini-detail", f"{count} item(s) · {money(total)} total")
     html = ""
     for pid, qty in cart.items():
         p = next(x for x in PRODUCTS if x["id"]==pid)
@@ -217,7 +217,7 @@ def add_to_cart(event):
     cart[pid] = cart.get(pid, 0) + 1
     update_cart_ui()
     name = next((p for p in PRODUCTS if p["id"]==pid), {"name":"treat"})
-    show_toast(f"Added {name['name']} 🥐 · {sum(cart.values())} in basket")
+    show_toast(f"Added {name['name']} · {sum(cart.values())} in basket")
 
 def change_qty(event):
     target = getattr(event, "target", None)
@@ -297,11 +297,11 @@ def close_all(event=None):
 
 def open_checkout(event=None):
     if not cart:
-        show_toast("Basket is empty — add a pastry first 🍩")
+        show_toast("Basket is empty — add a pastry first")
         return
     close_all()
     sub, disc, total = cart_totals()
-    _set_text("#checkout-summary", f"{sum(cart.values())} items · Total {money(total)} (you save {money(disc)})")
+    _set_text("#checkout-summary", f"{sum(cart.values())} items · Total {money(total)}")
     _set_display("#order-form", "block")
     _set_display("#order-success", "none")
     node = _el("#order-modal")
@@ -326,40 +326,55 @@ def place_order(event):
         pass
     name = _get_value("#f-name").strip()
     phone = _get_value("#f-phone").strip()
+    address = _get_value("#f-address").strip()
     time = _get_value("#f-time") or "ASAP (~15 min)"
     notes = _get_value("#f-notes").strip()
+    try:
+        _sel = document.querySelector('input[name="pay"]:checked')
+        pay = (_sel.value if _sel is not None else "COD") or "COD"
+    except Exception:
+        pay = "COD"
+    gcash_ref = _get_value("#f-gcash-ref").strip()
+    if pay not in ("COD", "GCash"):
+        pay = "COD"
     if len(name) < 2:
-        show_toast("Please tell us your name so we can label your box 🙏")
+        show_toast("Please tell us your name so we can label your box")
         return
     if len(re.sub(r"\D","",phone)) < 7:
-        show_toast("Hmm, that phone looks short — we'll need it for pickup 📞")
+        show_toast("Hmm, that phone looks short — we'll need it for pickup")
+        return
+    if len(address) < 5:
+        show_toast("Please add your delivery address so we know where to bring it")
+        return
+    if pay == "GCash" and len(re.sub(r"\D", "", gcash_ref)) < 4:
+        show_toast("Please enter your GCash reference number")
         return
     sub, disc, total = cart_totals()
     order_no = random.randint(1000,9999)
     _set_display("#order-form", "none")
     _set_display("#order-success", "block")
-    _set_html("#order-success-text", f"Thanks <b>{name}</b>! Order <b>#HB-{order_no}</b> · {sum(cart.values())} items · <b>{money(total)}</b><br>Pickup: {time}<br>We'll text {phone}. {('Note saved: '+notes) if notes else ''}")
+    _set_html("#order-success-text", f"Thanks <b>{name}</b>! Order <b>#HB-{order_no}</b> · {sum(cart.values())} items · <b>{money(total)}</b><br>Pickup: {time}<br>Deliver to: {address}<br>Payment: <b>{pay}</b>{(' (Ref ' + gcash_ref + ')') if pay == 'GCash' else ''}<br>We'll text {phone}. {('Note saved: '+notes) if notes else ''}")
     cart.clear()
     update_cart_ui()
-    show_toast(f"Order #HB-{order_no} placed! See you soon 🎉")
+    show_toast(f"Order #HB-{order_no} placed! See you soon")
 
 def clear_cart(event=None):
     cart.clear()
     update_cart_ui()
-    show_toast("Basket cleared 🧹")
+    show_toast("Basket cleared")
 
 def say_hello(event=None):
-    show_toast(f"Hello sweet tooth! 🍯 {len(PRODUCTS)} fresh treats baked today.")
+    show_toast(f"Hello sweet tooth! {len(PRODUCTS)} fresh treats baked today.")
 
 def chef_surprise(event=None):
     p = random.choice(PRODUCTS)
-    _set_html("#chef-output", f"👨‍🍳 Chef's pick: <b>{p['name']}</b> — {p['desc']} <b>{money(p['price'])}</b> · ★ {p['rating']}")
-    show_toast(f"Chef's pick: {p['name']} ✨")
+    _set_html("#chef-output", f"<svg style='width:16px;height:16px;vertical-align:-3px;color:var(--orange-deep)' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z'/><path d='M6 17h12'/></svg> Chef's pick: <b>{p['name']}</b> — {p['desc']} <b>{money(p['price'])}</b> · <svg style='width:13px;height:13px;vertical-align:-2px;fill:var(--orange-deep);color:var(--orange-deep)' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg> {p['rating']}")
+    show_toast(f"Chef's pick: {p['name']}")
 
 def subscribe_newsletter(event=None):
     email = _get_value("#newsletter-email").strip()
     if not re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", email):
-        _set_text("#newsletter-msg", "⚠️ That email looks off — try again?")
+        _set_text("#newsletter-msg", "That email looks off — try again?")
         node = _el("#newsletter-msg")
         if node is not None:
             try:
@@ -367,7 +382,7 @@ def subscribe_newsletter(event=None):
             except Exception:
                 pass
         return
-    _set_text("#newsletter-msg", f"🎉 Welcome {email}! Fresh-bake alerts ON — see you Friday.")
+    _set_text("#newsletter-msg", f"Welcome {email}! Fresh-bake alerts ON — see you Friday.")
     node = _el("#newsletter-msg")
     if node is not None:
         try:
@@ -380,7 +395,96 @@ def subscribe_newsletter(event=None):
             email_node.value = ""
         except Exception:
             pass
-    show_toast("Subscribed! First alert drops Friday 🥐")
+    show_toast("Subscribed! First alert drops Friday")
+
+def _paint_stars(n):
+    try:
+        btns = document.querySelectorAll(".star-input button")
+        for b in btns:
+            try:
+                v = int(b.getAttribute("data-stars") or 0)
+            except Exception:
+                v = 0
+            try:
+                if v <= n:
+                    b.classList.add("active")
+                else:
+                    b.classList.remove("active")
+            except Exception:
+                pass
+    except Exception as err:
+        js.console.warn(f"[HoneyBabe] paint stars failed: {err}")
+
+def set_rating(event=None):
+    global _review_rating
+    target = getattr(event, "target", None) if event is not None else None
+    try:
+        el = target.closest("[data-stars]") if target is not None else None
+    except Exception:
+        el = None
+    if el is None:
+        return
+    try:
+        _review_rating = max(1, min(5, int(el.getAttribute("data-stars") or 5)))
+    except Exception:
+        _review_rating = 5
+    node = _el("#fb-rating")
+    if node is not None:
+        try:
+            node.value = str(_review_rating)
+        except Exception:
+            pass
+    _set_text("#fb-rating-label", f"Your rating: {_review_rating} star{'s' if _review_rating != 1 else ''}")
+    _paint_stars(_review_rating)
+
+def _review_stars_html(n):
+    filled = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
+    empty = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#c9a87a' stroke-width='1.8'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
+    return "<span class='stars-ico'>" + filled * n + empty * (5 - n) + "</span>"
+
+def submit_review(event=None):
+    try:
+        event.preventDefault()
+    except Exception:
+        pass
+    name = _get_value("#fb-name").strip()
+    msg = _get_value("#fb-msg").strip()
+    try:
+        n = max(1, min(5, int(_get_value("#fb-rating") or _review_rating or 5)))
+    except Exception:
+        n = _review_rating
+    if len(name) < 2:
+        show_toast("Please add your name so we can credit your review")
+        return
+    if len(msg) < 3:
+        show_toast("Please write a few words about your treat")
+        return
+    safe_name = html.escape(name[:40])
+    safe_msg = html.escape(msg[:400])
+    card = (
+        "<div class='testi'>" + _review_stars_html(n) +
+        "<p>\u201c" + safe_msg + "\u201d</p>" +
+        "<div class='who'><div><b>" + safe_name + "</b><br>" +
+        "<span class='verified'><svg style='width:12px;height:12px;vertical-align:-1px' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg> " +
+        str(n) + "-star review</span></div></div></div>"
+    )
+    grid = _el(".testi-grid")
+    if grid is None:
+        show_toast("Review wall not found — please refresh")
+        return
+    try:
+        grid.innerHTML = card + grid.innerHTML
+    except Exception as err:
+        js.console.warn(f"[HoneyBabe] submit_review failed: {err}")
+        return
+    for sel in ("#fb-name", "#fb-msg"):
+        node = _el(sel)
+        if node is not None:
+            try:
+                node.value = ""
+            except Exception:
+                pass
+    show_toast(f"Thanks {name}! Your {n}-star review is live")
 
 # ---------- init: only after the DOM is ready, never crash ----------
 
@@ -388,14 +492,14 @@ def _init(*_args):
     try:
         render_menu()
         update_cart_ui()
-        _set_html("#py-status", "✅ <b>Fresh-bake system live!</b> Menu, basket & checkout are running in Python 🐍 — 12 treats today.")
+        _set_html("#py-status", "<svg style='width:16px;height:16px;vertical-align:-3px;color:#2e9e5b' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><polyline points='9 12 11 14 15 10'/></svg> <b>Fresh-bake system live!</b> Menu, basket & checkout are ready — 12 treats today.")
         _set_text("#float-special", random.choice(PRODUCTS)["name"])
     except Exception as err:
         try:
             js.console.error(f"[HoneyBabe] init failed: {err}")
         except Exception:
             pass
-        _set_html("#py-status", "⚠️ Python had trouble starting — please refresh the page.")
+        _set_html("#py-status", "Something had trouble starting — please refresh the page.")
 
 try:
     _ready = js.document.readyState
