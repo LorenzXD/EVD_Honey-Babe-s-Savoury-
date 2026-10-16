@@ -353,7 +353,7 @@ def place_order(event):
     order_no = random.randint(1000,9999)
     _set_display("#order-form", "none")
     _set_display("#order-success", "block")
-    _set_html("#order-success-text", f"Thanks <b>{name}</b>! Order <b>#HB-{order_no}</b> · {sum(cart.values())} items · <b>{money(total)}</b><br>Pickup: {time}<br>Deliver to: {address}<br>Payment: <b>{pay}</b>{(' (Ref ' + gcash_ref + ')') if pay == 'GCash' else ''}<br>We'll text {phone}. {('Note saved: '+notes) if notes else ''}")
+    _set_html("#order-success-text", f"Thanks <b>{html.escape(name)}</b>! Order <b>#HB-{order_no}</b> · {sum(cart.values())} items · <b>{money(total)}</b><br>Pickup: {html.escape(time)}<br>Deliver to: {html.escape(address)}<br>Payment: <b>{pay}</b>{(' (Ref ' + html.escape(gcash_ref) + ')') if pay == 'GCash' else ''}<br>We'll text {html.escape(phone)}. {('Note saved: '+html.escape(notes)) if notes else ''}")
     cart.clear()
     update_cart_ui()
     show_toast(f"Order #HB-{order_no} placed! See you soon")

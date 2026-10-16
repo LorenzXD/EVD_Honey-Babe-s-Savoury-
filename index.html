@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HoneyBabe's Savory — Artisan Filipino-European Pastry Boutique | Fresh Daily, Custom Cakes & Catering</title>
-<meta name="description" content="HoneyBabe's Savory is an artisan pastry boutique baking small-batch Filipino-European treats daily: ube ensaymada, leche flan, mango float, custom cakes & catering. Order pickup or delivery. Rated 4.9 from 2,300+ reviews." />
+<title>HoneyBabe's Savory — Artisan Filipino-European Pastry Boutique | Fresh Daily & Custom Cakes</title>
+<meta name="description" content="HoneyBabe's Savory is an artisan pastry boutique baking small-batch Filipino-European treats daily: ube ensaymada, leche flan, mango float & custom cakes. Order pickup or delivery. Rated 4.9 from 2,300+ reviews." />
 <meta name="theme-color" content="#4e2626" />
 <link rel="canonical" href="https://honeybabe.shop/" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="HoneyBabe's Savory — Handcrafted Pastries Worth Waking Up For" />
-<meta property="og:description" content="Small-batch pastries, custom celebration cakes & catering. Baked fresh hourly. Order pickup in 15 minutes." />
+<meta property="og:description" content="Small-batch pastries & custom celebration cakes. Baked fresh hourly. Order pickup in 15 minutes." />
 <meta property="og:image" content="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1200&q=80" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" href="./LOGO.jpg" />
@@ -17,6 +17,7 @@
 <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
@@ -68,10 +69,7 @@
   .sec-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin:12px 0 10px;color:var(--maroon-dark)}
   .sec-head p{color:var(--muted);margin:0;font-size:1.05rem;line-height:1.7}
   section{padding:88px 0}
-  /* announcement */
-  .announce{background:var(--maroon-dark);color:#ffe8c8;text-align:center;font-size:.86rem;font-weight:600;padding:10px 16px;letter-spacing:.02em}
-  .announce b{color:#fff;background:var(--orange-deep);padding:2px 10px;border-radius:999px;margin:0 6px;font-size:.78rem;letter-spacing:.06em}
-  /* NAV */
+  /* nav */
   nav{position:sticky;top:0;z-index:50;background:rgba(255,251,244,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:box-shadow .2s}
   nav.scrolled{box-shadow:0 8px 30px rgba(78,38,38,.12)}
   .nav-inner{max-width:var(--max);margin:0 auto;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -174,17 +172,6 @@
   .craft .mini-stats{display:flex;gap:28px;margin:22px 0;flex-wrap:wrap}
   .craft .mini-stats b{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--maroon-dark)}
   #chef-output{background:var(--cream);border:1px dashed var(--maroon-light);padding:13px 15px;border-radius:12px;margin-top:12px;font-size:.92rem}
-  /* catering */
-  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
-  .tier{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);position:relative}
-  .tier.featured{background:var(--maroon);color:#ffedda;border-color:var(--maroon-dark)}
-  .tier.featured p{color:#f7dcc0}
-  .tier h3{margin:10px 0 6px}
-  .tier p{color:var(--muted);font-size:.93rem;margin:0 0 12px}
-  .tier ul{margin:0 0 16px;padding-left:18px;color:inherit;font-size:.9rem;display:grid;gap:6px}
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
-  .step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;text-align:center}
-  .step b{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--maroon);color:#fff;margin-bottom:8px}
   /* testimonials */
   .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
   .testi{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
@@ -214,6 +201,8 @@
   .faq-q{width:100%;text-align:left;background:none;border:none;padding:17px 18px;font-weight:800;color:var(--maroon-dark);cursor:pointer;font-size:.98rem;font-family:inherit;display:flex;justify-content:space-between;align-items:center;gap:12px}
   .faq-a{display:none;padding:0 18px 18px;color:var(--muted);font-size:.93rem}
   .faq-item.open .faq-a{display:block}
+  .faq-q svg{transition:transform .2s;flex:none}
+  .faq-item.open .faq-q svg{transform:rotate(45deg)}
   /* visit */
   .visit{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;margin-top:34px}
   .panel{background:var(--maroon);color:#ffedda;border-radius:22px;padding:34px;box-shadow:var(--shadow)}
@@ -242,10 +231,8 @@
   .btn .ico{width:18px;height:18px}
   .prop .icon svg{width:22px;height:22px;color:var(--maroon)}
   .prop .icon{background:linear-gradient(135deg,var(--orange-soft),#fff);color:var(--maroon)}
-  .t-ic,.tier-ic{width:38px;height:38px;border-radius:12px;display:inline-grid;place-items:center;flex:none;background:#ffffff22;color:#ffe8c8}
-  .tier .tier-ic{background:var(--orange-soft);color:var(--maroon-dark)}
-  .tier.featured .tier-ic{background:#ffffff22;color:#ffe8c8}
-  .t-ic svg,.tier-ic svg{width:20px;height:20px}
+  .t-ic{width:38px;height:38px;border-radius:12px;display:inline-grid;place-items:center;flex:none;background:#ffffff22;color:#ffe8c8}
+  .t-ic svg{width:20px;height:20px}
   .trustbar .t .t-ic{width:32px;height:32px;border-radius:10px}
   .trustbar .t .t-ic svg{width:17px;height:17px}
   .info-row .ic svg{width:18px;height:18px}
@@ -257,7 +244,7 @@
   .craft .check li{display:flex;gap:10px;align-items:flex-start}
   .craft .check li svg{width:20px;height:20px;color:var(--orange-deep);flex:none;margin-top:2px}
   .craft .check li b{color:var(--maroon-dark)}
-  .announce .ico,.menu-note .ico{width:16px;height:16px;vertical-align:-3px}
+  .menu-note .ico{width:16px;height:16px;vertical-align:-3px}
   .badge-fresh{display:inline-flex;align-items:center;gap:7px}
   .badge-fresh svg{width:15px;height:15px}
   .marquee-inner .dot-sep{color:var(--orange);margin:0 10px}
@@ -296,7 +283,7 @@
   .reveal.visible{opacity:1;transform:none}
   @media(max-width:1000px){
     .props{grid-template-columns:1fr 1fr}
-    .tiers,.testi-grid,.steps{grid-template-columns:1fr 1fr}
+    .testi-grid{grid-template-columns:1fr 1fr}
     .gallery{grid-template-columns:1fr 1fr}
     .foot{grid-template-columns:1fr 1fr}
   }
@@ -304,9 +291,15 @@
     .hero,.craft,.visit{grid-template-columns:1fr}
     .links{display:none}
     #hamburger{display:block}
+    .nav-inner{padding:12px 16px;gap:10px}
+    #mobile-menu{padding:12px 16px 18px}
+    .nav-actions .btn-outline{display:none}
+    .logo{width:40px;height:40px}
+    .brand b{font-size:1.05rem}
+    .brand small{font-size:.56rem;letter-spacing:.14em}
     .hero-img-main{height:340px}
     #fc1{left:8px}#fc2{right:8px}
-    .tiers,.testi-grid,.steps{grid-template-columns:1fr}
+    .testi-grid{grid-template-columns:1fr}
     #search{margin-left:0;width:100%}
     .foot{grid-template-columns:1fr}
     .props{grid-template-columns:1fr}
@@ -320,6 +313,7 @@
 </style>
 </head>
 <body>
+<noscript><div style="background:#4e2626;color:#ffe8c8;text-align:center;padding:12px 16px;font-weight:700">Please enable JavaScript — the menu, basket and checkout need it to serve you fresh.</div></noscript>
 
 <nav id="topnav" aria-label="Main navigation">
   <div class="nav-inner">
@@ -421,7 +415,7 @@
     <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
       <span id="menu-count" role="status">Loading treats…</span>
     </div>
-    <div class="toolbar" role="tablist" aria-label="Filter pastries">
+    <div class="toolbar" role="group" aria-label="Filter pastries">
       <button class="chip active" data-cat="All" py-click="set_filter">All</button>
       <button class="chip" data-cat="Kakanin" py-click="set_filter">Kakanin</button>
       <button class="chip" data-cat="Cakes" py-click="set_filter">Cakes</button>
@@ -513,11 +507,11 @@
 <section class="wrap reveal">
   <div class="sec-head"><span class="eyebrow">Good To Know</span><h2>Questions, answered</h2></div>
   <div class="faq">
-    <div class="faq-item"><button class="faq-q">How fast is pickup? <svg class="ico" style="width:16px;height:16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Most menu orders are ready in ~15 minutes. Custom dedication cakes need 48 hours — order ahead and we'll text you the moment it's boxed.</div></div>
-    <div class="faq-item"><button class="faq-q">Do you deliver? <svg class="ico" style="width:16px;height:16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Yes — free delivery over ₱35 within the Butter District.</div></div>
-    <div class="faq-item"><button class="faq-q">Do you take custom cake designs? <svg class="ico" style="width:16px;height:16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Absolutely. Send a photo or theme via the visit form or Instagram. We send a free sketch within 24 hours, then bake on your date.</div></div>
-    <div class="faq-item"><button class="faq-q">Are your pastries good for gifts / bulk? <svg class="ico" style="width:16px;height:16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Yes — polvoron, macaroons and ensaymada boxes are our most-gifted items. 30+ pieces are individually boxed with ribbon on request.</div></div>
-    <div class="faq-item"><button class="faq-q">What if I'm not happy? <svg class="ico" style="width:16px;height:16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Tell us within 24 hours and we'll replace it or refund it — our freshness guarantee, no interrogation.</div></div>
+    <div class="faq-item"><button class="faq-q" aria-expanded="false">How fast is pickup? <svg class="ico" style="width:16px;height:16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Most menu orders are ready in ~15 minutes. Custom dedication cakes need 48 hours — order ahead and we'll text you the moment it's boxed.</div></div>
+    <div class="faq-item"><button class="faq-q" aria-expanded="false">Do you deliver? <svg class="ico" style="width:16px;height:16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Yes — free delivery over ₱35 within the Butter District.</div></div>
+    <div class="faq-item"><button class="faq-q" aria-expanded="false">Do you take custom cake designs? <svg class="ico" style="width:16px;height:16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Absolutely. Send a photo or theme via the visit form or Instagram. We send a free sketch within 24 hours, then bake on your date.</div></div>
+    <div class="faq-item"><button class="faq-q" aria-expanded="false">Are your pastries good for gifts / bulk? <svg class="ico" style="width:16px;height:16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Yes — polvoron, macaroons and ensaymada boxes are our most-gifted items. 30+ pieces are individually boxed with ribbon on request.</div></div>
+    <div class="faq-item"><button class="faq-q" aria-expanded="false">What if I'm not happy? <svg class="ico" style="width:16px;height:16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Tell us within 24 hours and we'll replace it or refund it — our freshness guarantee, no interrogation.</div></div>
   </div>
 </section>
 
@@ -582,7 +576,7 @@
   </div>
 </aside>
 
-<div id="order-modal" role="dialog" aria-label="Checkout">
+<div id="order-modal" role="dialog" aria-modal="true" aria-label="Checkout">
   <h3 style="margin-top:0;color:var(--maroon-dark);display:flex;align-items:center;gap:8px"><svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/><path d="M2 21h20"/><path d="M7 8v3"/><path d="M12 8v3"/><path d="M17 8v3"/></svg> Checkout</h3>
   <p style="color:var(--muted);margin-top:0" id="checkout-summary">0 items</p>
   <form id="order-form" py-submit="place_order">
@@ -639,7 +633,22 @@
   }
   document.querySelectorAll('.faq-item').forEach(function(item){
     var q = item.querySelector('.faq-q');
-    if (q) q.addEventListener('click', function(){ item.classList.toggle('open'); });
+    if (q) q.addEventListener('click', function(){
+      var isOpen = item.classList.toggle('open');
+      q.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+  // Escape closes drawer, checkout modal and mobile menu
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Escape' && e.key !== 'Esc') return;
+    var d = document.getElementById('cart-drawer');
+    var o = document.getElementById('overlay');
+    var m = document.getElementById('order-modal');
+    if (d) d.classList.remove('open');
+    if (o) o.classList.remove('show');
+    if (m) m.classList.remove('show');
+    if (mm) mm.classList.remove('open');
+    if (burger) burger.setAttribute('aria-expanded', 'false');
   });
   // COD / GCash toggle
   var gcashBox = document.getElementById('gcash-fields');
