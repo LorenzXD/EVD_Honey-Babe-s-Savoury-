@@ -8,7 +8,7 @@ import re
 # 12 house signatures — categories match the filter chips in index.html:
 # All / Kakanin / Cakes / Cookies / Chilled / Savory
 PRODUCTS = [
-  {"id":1, "name":"Puto Cheese (4 pcs)", "cat":"Kakanin", "price":2.50, "rating":4.9, "desc":"Cloud-soft steamed rice cakes crowned with melty cheese. Our #1 merienda box.", "img":"https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=600&q=80", "pairing": "a merienda favorite with barako coffee"},
+  {"id":1, "name":"Puto Cheese Bites (50 pcs)", "cat":"Kakanin", "price":200, "rating":4.9, "desc":"Bite-size steamed rice cakes crowned with melty cheese — 50 pieces per box. Made for sharing.", "img":"./assets/puto-cheese.jpg", "pairing": "a merienda favorite with barako coffee"},
   {"id":2, "name":"Coconut Macaroons (6 pcs)", "cat":"Cookies", "price":3.20, "rating":4.8, "desc":"Golden Filipino coconut macaroons — crisp edges, chewy centers, baked hourly.", "img":"https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=600&q=80", "pairing": "crisp with afternoon tea"},
   {"id":3, "name":"Classic Leche Flan", "cat":"Chilled", "price":4.50, "rating":4.9, "desc":"Silky caramel custard, slow-steamed the traditional way. Jiggly & rich.", "img":"https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80", "pairing": "black coffee's best friend"},
   {"id":4, "name":"Maja Blanca Cup", "cat":"Kakanin", "price":3.80, "rating":4.8, "desc":"Creamy coconut pudding with sweet corn, crowned with toasted latik crunch.", "img":"https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=600&q=80", "pairing": "love it with toasted latik on top"},
@@ -88,7 +88,9 @@ def _later(fn, ms):
 # ---------- shop logic ----------
 
 def money(n):
-    return f"₱{n:.2f}"
+    if abs(n - round(n)) < 0.005:
+        return f"₱{int(round(n)):,}"
+    return f"₱{n:,.2f}"
 
 def show_toast(msg):
     t = _el("#toast")
