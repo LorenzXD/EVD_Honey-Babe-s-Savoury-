@@ -8,24 +8,27 @@ import re
 # 12 house signatures — categories match the filter chips in index.html:
 # All / Kakanin / Cakes / Cookies / Chilled / Savory
 PRODUCTS = [
-  {"id":1, "name":"Puto Cheese (4 pcs)", "cat":"Kakanin", "price":2.50, "rating":4.9, "desc":"Cloud-soft steamed rice cakes crowned with melty cheese. Our #1 merienda box.", "img":"https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=600&q=80"},
-  {"id":2, "name":"Coconut Macaroons (6 pcs)", "cat":"Cookies", "price":3.20, "rating":4.8, "desc":"Golden Filipino coconut macaroons — crisp edges, chewy centers, baked hourly.", "img":"https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=600&q=80"},
-  {"id":3, "name":"Classic Leche Flan", "cat":"Chilled", "price":4.50, "rating":4.9, "desc":"Silky caramel custard, slow-steamed the traditional way. Jiggly & rich.", "img":"https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80"},
-  {"id":4, "name":"Maja Blanca Cup", "cat":"Kakanin", "price":3.80, "rating":4.8, "desc":"Creamy coconut pudding with sweet corn, crowned with toasted latik crunch.", "img":"https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=600&q=80"},
-  {"id":5, "name":"Mango Float Tub", "cat":"Chilled", "price":5.20, "rating":4.9, "desc":"Layers of ripe mango, sweet cream & graham. Chilled overnight, sliced to order.", "img":"https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=600&q=80"},
-  {"id":6, "name":"Classic Banana Cake", "cat":"Cakes", "price":4.00, "rating":4.7, "desc":"Extra-moist banana cake with a caramelized golden top. Coffee's best friend.", "img":"https://images.unsplash.com/photo-1606101273945-e9eba91c0dc4?auto=format&fit=crop&w=600&q=80"},
-  {"id":7, "name":"Chicken Cordon Bleu Bites", "cat":"Savory", "price":6.80, "rating":4.8, "desc":"Crispy chicken rolled with ham & cheese, served with our signature creamy dip.", "img":"https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=600&q=80"},
-  {"id":8, "name":"Polvoron Assorted (5 pcs)", "cat":"Cookies", "price":2.00, "rating":4.7, "desc":"Buttery toasted-flour shortbread that melts in your mouth. Best pasalubong box.", "img":"https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=80"},
-  {"id":9, "name":"Ube Cheese Ensaymada", "cat":"Kakanin", "price":3.60, "rating":4.9, "desc":"Pillowy brioche swirled with real ube halaya, buttercream & grated cheese.", "img":"https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80"},
-  {"id":10, "name":"Mocha Chiffon Cake", "cat":"Cakes", "price":4.80, "rating":4.8, "desc":"Feather-light mocha chiffon with silky buttercream. Custom dedications free.", "img":"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80"},
-  {"id":11, "name":"Ham & Cheese Pandesal (3 pcs)", "cat":"Savory", "price":3.40, "rating":4.7, "desc":"Toasted pandesal stuffed with ham & melted cheese. Served warm in 15 min.", "img":"https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80"},
-  {"id":12, "name":"Ube Flan Cake Slice", "cat":"Chilled", "price":5.80, "rating":4.9, "desc":"Our showstopper: ube chiffon + leche flan + caramel. Wedding favorite.", "img":"https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=600&q=80"},
+  {"id":1, "name":"Puto Cheese (4 pcs)", "cat":"Kakanin", "price":2.50, "rating":4.9, "desc":"Cloud-soft steamed rice cakes crowned with melty cheese. Our #1 merienda box.", "img":"https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=600&q=80", "pairing": "a merienda favorite with barako coffee"},
+  {"id":2, "name":"Coconut Macaroons (6 pcs)", "cat":"Cookies", "price":3.20, "rating":4.8, "desc":"Golden Filipino coconut macaroons — crisp edges, chewy centers, baked hourly.", "img":"https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=600&q=80", "pairing": "crisp with afternoon tea"},
+  {"id":3, "name":"Classic Leche Flan", "cat":"Chilled", "price":4.50, "rating":4.9, "desc":"Silky caramel custard, slow-steamed the traditional way. Jiggly & rich.", "img":"https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80", "pairing": "black coffee's best friend"},
+  {"id":4, "name":"Maja Blanca Cup", "cat":"Kakanin", "price":3.80, "rating":4.8, "desc":"Creamy coconut pudding with sweet corn, crowned with toasted latik crunch.", "img":"https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=600&q=80", "pairing": "love it with toasted latik on top"},
+  {"id":5, "name":"Mango Float Tub", "cat":"Chilled", "price":5.20, "rating":4.9, "desc":"Layers of ripe mango, sweet cream & graham. Chilled overnight, sliced to order.", "img":"https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=600&q=80", "pairing": "the cool-down after lunch"},
+  {"id":6, "name":"Classic Banana Cake", "cat":"Cakes", "price":4.00, "rating":4.7, "desc":"Extra-moist banana cake with a caramelized golden top. Coffee's best friend.", "img":"https://images.unsplash.com/photo-1606101273945-e9eba91c0dc4?auto=format&fit=crop&w=600&q=80", "pairing": "best beside a morning barako"},
+  {"id":7, "name":"Chicken Cordon Bleu Bites", "cat":"Savory", "price":6.80, "rating":4.8, "desc":"Crispy chicken rolled with ham & cheese, served with our signature creamy dip.", "img":"https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=600&q=80", "pairing": "built for the creamy dip"},
+  {"id":8, "name":"Polvoron Assorted (5 pcs)", "cat":"Cookies", "price":2.00, "rating":4.7, "desc":"Buttery toasted-flour shortbread that melts in your mouth. Best pasalubong box.", "img":"https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=80", "pairing": "the pasalubong-box hero"},
+  {"id":9, "name":"Ube Cheese Ensaymada", "cat":"Kakanin", "price":3.60, "rating":4.9, "desc":"Pillowy brioche swirled with real ube halaya, buttercream & grated cheese.", "img":"https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80", "pairing": "our #1 with kapeng barako"},
+  {"id":10, "name":"Mocha Chiffon Cake", "cat":"Cakes", "price":4.80, "rating":4.8, "desc":"Feather-light mocha chiffon with silky buttercream. Custom dedications free.", "img":"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80", "pairing": "a birthday-table regular"},
+  {"id":11, "name":"Ham & Cheese Pandesal (3 pcs)", "cat":"Savory", "price":3.40, "rating":4.7, "desc":"Toasted pandesal stuffed with ham & melted cheese. Served warm in 15 min.", "img":"https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80", "pairing": "warm, toasted, on the go"},
+  {"id":12, "name":"Ube Flan Cake Slice", "cat":"Chilled", "price":5.80, "rating":4.9, "desc":"Our showstopper: ube chiffon + leche flan + caramel. Wedding favorite.", "img":"https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=600&q=80", "pairing": "the wedding-table showstopper"},
 ]
 
 cart = {}  # id -> qty
 active_cat = "All"
 search_q = ""
 _review_rating = 5
+
+# Entrance stagger for the menu grid (re-armed on filter change, muted while typing).
+_animate_menu = True
 
 # Hold JS proxies so the garbage collector never frees callbacks early.
 _held_proxies = []
@@ -114,38 +117,84 @@ def filtered_products():
         out.append(p)
     return out
 
+def _menu_kinds(n):
+    # Editorial 12-col composition: one full-width banner opener, optional wide
+    # feature cards, the rest compact. Wides are added only in counts that keep
+    # the grid rows full (all spans are multiples of 4 on a 12-col grid).
+    if n < 6:
+        return ["card"] * n
+    kinds = ["card"] * n
+    kinds[0] = "banner"
+    m = n - 1
+    w = 0
+    while (4 * n + 8 + 4 * w) % 12 != 0:
+        w += 1
+    if w <= m:
+        for k in range(w):
+            kinds[1 + int((k + 0.5) * m / w)] = "wide"
+    return kinds
+
 def render_menu():
+    global _animate_menu
     grid = _el("#menu-grid")
     if grid is None:
         return
+    animate = _animate_menu
+    _animate_menu = False
     items = filtered_products()
-    _set_text("#menu-count", f"{len(items)} treat{'s' if len(items)!=1 else ''} · baked fresh today")
+    if items:
+        _set_text("#menu-count", f"{len(items)} of {len(PRODUCTS)} treats · baked fresh hourly")
+    else:
+        _set_text("#menu-count", "Nothing matched on today's list")
     if not items:
         try:
-            grid.innerHTML = "<div style='grid-column:1/-1;background:#fff;border:1px dashed var(--maroon-light);padding:28px;border-radius:16px;text-align:center'><svg style='width:22px;height:22px;color:var(--maroon);vertical-align:-4px' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg> No pastries match — try clearing your search or tapping All.</div>"
+            grid.innerHTML = (
+                "<div class='menu-empty'>"
+                "<svg class='empty-ico' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>"
+                "<b>No pastries match that craving</b>"
+                "<p>Try a different word or category — the oven's still ticking.</p>"
+                "<button class='btn btn-outline btn-sm' py-click='reset_filters'>Show the full menu</button>"
+                "</div>"
+            )
         except Exception as err:
             js.console.warn(f"[HoneyBabe] render_menu failed: {err}")
         return
+    star = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
+    arrow = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14'/><path d='m12 5 7 7-7 7'/></svg>"
+    plus = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round'><line x1='12' y1='5' x2='12' y2='19'/><line x1='5' y1='12' x2='19' y2='12'/></svg>"
+    kinds = _menu_kinds(len(items))
     html = ""
-    for p in items:
-        badge = "<span class='best-badge'><svg style='width:11px;height:11px;vertical-align:-1px' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor' stroke-width='1'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg> BESTSELLER</span>" if p["rating"] >= 4.9 else ""
+    for idx, p in enumerate(items):
+        best = "<b class='card-best'> · Bestseller</b>" if p["rating"] >= 4.9 else ""
+        kind = kinds[idx]
+        open_cls = "card enter" if animate else "card"
+        if kind != "card":
+            open_cls += " card--" + kind
+        card_style = f' style="--i:{idx}"' if animate else ""
+        extra = ""
+        if kind == "banner" and p.get("pairing"):
+            extra = "<p class='card-pairing'><b>Pair it with</b> — " + p["pairing"] + "</p>"
         html += f"""
-        <div class="card">
-          <div class="card-img">
-            <img src="{p['img']}" alt="{p['name']}" loading="lazy" onerror="this.src='https://placehold.co/600x400/f6eee1/7d4444?text=Pastry'" />
-            {badge}
-            <span class="cat-badge">{p['cat']}</span>
-            <span class="price-badge">{money(p['price'])}</span>
+        <article class="{open_cls}"{card_style}>
+          <button class="card-open" data-id="{p['id']}" py-click="open_dish" aria-label="View details of {p['name']}"></button>
+          <div class="card-media">
+            <img src="{p['img']}" alt="{p['name']}" loading="lazy" onerror="this.src='https://placehold.co/600x400/f7f1e5/40251c?text=Pastry'" />
+            <span class="card-view">View details{arrow}</span>
           </div>
           <div class="card-body">
+            <div class="card-meta">
+              <span class="card-cat">{p['cat']}{best}</span>
+              <span class="card-rating">{star}{p['rating']}</span>
+            </div>
             <h3>{p['name']}</h3>
             <p>{p['desc']}</p>
-            <div class="card-foot">
-              <span class="rating"><svg style="width:13px;height:13px;vertical-align:-2px;fill:currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> {p['rating']}</span>
-              <button class="add-btn" data-id="{p['id']}" py-click="add_to_cart" aria-label="Add {p['name']} to basket">Add <svg style="width:13px;height:13px;vertical-align:-2px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
-            </div>
+            {extra}
           </div>
-        </div>
+          <div class="card-foot">
+            <span class="card-price">{money(p['price'])}</span>
+            <button class="add-btn" data-id="{p['id']}" py-click="add_to_cart" aria-label="Add {p['name']} to basket">Add{plus}</button>
+          </div>
+        </article>
         """
     try:
         grid.innerHTML = html
@@ -179,7 +228,7 @@ def update_cart_ui():
         p = next(x for x in PRODUCTS if x["id"]==pid)
         html += f"""
         <div class="cart-item">
-          <img src="{p['img']}" alt="{p['name']}" onerror="this.src='https://placehold.co/100x100/f6eee1/7d4444?text=Yum'" />
+          <img src="{p['img']}" alt="{p['name']}" onerror="this.src='https://placehold.co/100x100/f7f1e5/40251c?text=Yum'" />
           <div><b style="font-size:.9rem">{p['name']}</b><br><small style="color:var(--muted)">{money(p['price'])} each</small><br><b>{money(p['price']*qty)}</b></div>
           <div class="qty">
             <button data-id="{pid}" data-act="dec" py-click="change_qty" aria-label="Decrease quantity">−</button>
@@ -243,7 +292,7 @@ def change_qty(event):
     update_cart_ui()
 
 def set_filter(event):
-    global active_cat
+    global active_cat, _animate_menu
     target = getattr(event, "target", None)
     if target is None:
         return
@@ -251,12 +300,34 @@ def set_filter(event):
         active_cat = target.getAttribute("data-cat") or "All"
     except Exception:
         active_cat = "All"
+    _animate_menu = True
+    _sync_chips()
+    render_menu()
+
+def _sync_chips():
     try:
-        for c in document.querySelectorAll(".chip"):
-            c.classList.remove("active")
-        target.classList.add("active")
+        for c in document.querySelectorAll(".chip[data-cat]"):
+            try:
+                on = (c.getAttribute("data-cat") or "All") == active_cat
+                c.classList.toggle("active", on)
+                c.setAttribute("aria-pressed", "true" if on else "false")
+            except Exception:
+                pass
     except Exception as err:
-        js.console.warn(f"[HoneyBabe] set_filter failed: {err}")
+        js.console.warn(f"[HoneyBabe] sync chips failed: {err}")
+
+def reset_filters(event=None):
+    global active_cat, search_q, _animate_menu
+    active_cat = "All"
+    search_q = ""
+    _animate_menu = True
+    node = _el("#search")
+    if node is not None:
+        try:
+            node.value = ""
+        except Exception:
+            pass
+    _sync_chips()
     render_menu()
 
 def search_menu(event):
@@ -268,6 +339,7 @@ def search_menu(event):
         search_q = target.value or ""
     except Exception:
         search_q = ""
+    _animate_menu = False
     render_menu()
 
 def _toggle_cart(open_it):
@@ -289,6 +361,12 @@ def open_cart(event=None):
 def close_all(event=None):
     _toggle_cart(False)
     node = _el("#order-modal")
+    if node is not None:
+        try:
+            node.classList.remove("show")
+        except Exception:
+            pass
+    node = _el("#dish-modal")
     if node is not None:
         try:
             node.classList.remove("show")
@@ -363,12 +441,127 @@ def clear_cart(event=None):
     update_cart_ui()
     show_toast("Basket cleared")
 
+# ---------- pastry detail view ----------
+
+_dish_id = None
+_dish_qty = 1
+
+def _dish_by_id(pid):
+    return next(p for p in PRODUCTS if p["id"] == pid)
+
+def _dish_paint():
+    p = _dish_by_id(_dish_id)
+    _set_text("#dish-qty", str(_dish_qty))
+    node = _el("#dish-add")
+    if node is not None:
+        try:
+            node.innerHTML = "Add to basket · " + money(p["price"] * _dish_qty)
+        except Exception as err:
+            js.console.warn(f"[HoneyBabe] dish label failed: {err}")
+
+def open_dish(event=None):
+    global _dish_id, _dish_qty
+    pid = _clicked_card_id(event)
+    if pid is None:
+        return
+    _dish_id = pid
+    _dish_qty = 1
+    p = _dish_by_id(pid)
+    img = _el("#dish-img")
+    if img is not None:
+        try:
+            img.setAttribute("src", p["img"])
+            img.setAttribute("alt", p["name"])
+        except Exception:
+            pass
+    try:
+        cat = _el("#dish-cat")
+        if cat is not None:
+            if p["rating"] >= 4.9:
+                cat.innerHTML = html.escape(p["cat"]) + " <b>· Bestseller</b>"
+            else:
+                cat.textContent = p["cat"]
+    except Exception as err:
+        js.console.warn(f"[HoneyBabe] dish cat failed: {err}")
+    _set_text("#dish-name", p["name"])
+    _set_html("#dish-rating", "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>" + f" {p['rating']}")
+    _set_text("#dish-desc", p["desc"])
+    heart = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/></svg>"
+    flame = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z'/></svg>"
+    truck = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='1' y='3' width='15' height='13' rx='1'/><path d='M16 8h4l3 3v5h-7V8z'/><circle cx='5.5' cy='18.5' r='2.5'/><circle cx='18.5' cy='18.5' r='2.5'/></svg>"
+    _set_html("#dish-facts",
+        "<li>" + heart + html.escape(p.get("pairing", "a house signature")) + "</li>"
+        + "<li>" + flame + "Baked fresh hourly</li>"
+        + "<li>" + truck + "Free delivery over ₱35</li>")
+    _dish_paint()
+    node = _el("#dish-modal")
+    if node is not None:
+        try:
+            node.classList.add("show")
+        except Exception:
+            pass
+    ov = _el("#overlay")
+    if ov is not None:
+        try:
+            ov.classList.add("show")
+        except Exception:
+            pass
+
+def close_dish(event=None):
+    node = _el("#dish-modal")
+    if node is not None:
+        try:
+            node.classList.remove("show")
+        except Exception:
+            pass
+    ov = _el("#overlay")
+    if ov is not None:
+        try:
+            ov.classList.remove("show")
+        except Exception:
+            pass
+
+def dish_step(event=None):
+    global _dish_qty
+    if _dish_id is None:
+        return
+    target = getattr(event, "target", None)
+    act = None
+    if target is not None:
+        try:
+            act = target.getAttribute("data-act")
+        except Exception:
+            act = None
+    if act == "up":
+        _dish_qty = min(12, _dish_qty + 1)
+    elif act == "down":
+        _dish_qty = max(1, _dish_qty - 1)
+    _dish_paint()
+
+def add_dish_to_cart(event=None):
+    global _dish_qty
+    if _dish_id is None:
+        return
+    p = _dish_by_id(_dish_id)
+    qty = _dish_qty
+    cart[_dish_id] = cart.get(_dish_id, 0) + qty
+    update_cart_ui()
+    show_toast(f"Added {p['name']} × {qty}")
+    _dish_qty = 1
+    close_dish()
+
 def say_hello(event=None):
     show_toast(f"Hello sweet tooth! {len(PRODUCTS)} fresh treats baked today.")
 
 def chef_surprise(event=None):
     p = random.choice(PRODUCTS)
-    _set_html("#chef-output", f"<svg style='width:16px;height:16px;vertical-align:-3px;color:var(--orange-deep)' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z'/><path d='M6 17h12'/></svg> Chef's pick: <b>{p['name']}</b> — {p['desc']} <b>{money(p['price'])}</b> · <svg style='width:13px;height:13px;vertical-align:-2px;fill:var(--orange-deep);color:var(--orange-deep)' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg> {p['rating']}")
+    _set_html(
+        "#chef-output",
+        "<svg class='ico' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z'/><path d='M6 17h12'/></svg>"
+        + " Chef's pick — <b>" + p['name'] + "</b> " + p['desc']
+        + " <span class='pick-price'>" + money(p['price']) + "</span>"
+        + "<button class='mini-add' data-id='" + str(p['id']) + "' py-click='add_to_cart'>Add to basket</button>"
+    )
     show_toast(f"Chef's pick: {p['name']}")
 
 def subscribe_newsletter(event=None):
@@ -492,7 +685,7 @@ def _init(*_args):
     try:
         render_menu()
         update_cart_ui()
-        _set_html("#py-status", "<svg style='width:16px;height:16px;vertical-align:-3px;color:#2e9e5b' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><polyline points='9 12 11 14 15 10'/></svg> <b>Fresh-bake system live!</b> Menu, basket & checkout are ready — 12 treats today.")
+        _set_html("#py-status", "<svg style='width:16px;height:16px;vertical-align:-3px;color:#1e7a44' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><polyline points='9 12 11 14 15 10'/></svg> <b>Fresh-bake system live!</b> Menu, basket & checkout are ready — 12 treats today.")
         _set_text("#float-special", random.choice(PRODUCTS)["name"])
     except Exception as err:
         try:
