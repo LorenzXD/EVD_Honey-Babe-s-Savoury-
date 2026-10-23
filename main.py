@@ -5,21 +5,17 @@ import html
 import random
 import re
 
-# 12 house signatures — categories match the filter chips in index.html:
+# 8 house signatures — categories match the filter chips in index.html:
 # All / Kakanin / Cakes / Cookies / Chilled / Savory
 PRODUCTS = [
   {"id":1, "name":"Puto Cheese Bites (50 pcs)", "cat":"Kakanin", "price":200, "rating":4.9, "desc":"Bite-size steamed rice cakes crowned with melty cheese — 50 pieces per box. Made for sharing.", "img":"./assets/puto-cheese.jpg", "pairing": "a merienda favorite with barako coffee"},
-  {"id":2, "name":"Coconut Macaroons (6 pcs)", "cat":"Cookies", "price":3.20, "rating":4.8, "desc":"Golden Filipino coconut macaroons — crisp edges, chewy centers, baked hourly.", "img":"https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=600&q=80", "pairing": "crisp with afternoon tea"},
-  {"id":3, "name":"Classic Leche Flan", "cat":"Chilled", "price":4.50, "rating":4.9, "desc":"Silky caramel custard, slow-steamed the traditional way. Jiggly & rich.", "img":"https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80", "pairing": "black coffee's best friend"},
-  {"id":4, "name":"Maja Blanca Cup", "cat":"Kakanin", "price":3.80, "rating":4.8, "desc":"Creamy coconut pudding with sweet corn, crowned with toasted latik crunch.", "img":"https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=600&q=80", "pairing": "love it with toasted latik on top"},
-  {"id":5, "name":"Mango Float Tub", "cat":"Chilled", "price":5.20, "rating":4.9, "desc":"Layers of ripe mango, sweet cream & graham. Chilled overnight, sliced to order.", "img":"https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=600&q=80", "pairing": "the cool-down after lunch"},
-  {"id":6, "name":"Classic Banana Cake", "cat":"Cakes", "price":4.00, "rating":4.7, "desc":"Extra-moist banana cake with a caramelized golden top. Coffee's best friend.", "img":"https://images.unsplash.com/photo-1606101273945-e9eba91c0dc4?auto=format&fit=crop&w=600&q=80", "pairing": "best beside a morning barako"},
-  {"id":7, "name":"Chicken Cordon Bleu Bites", "cat":"Savory", "price":6.80, "rating":4.8, "desc":"Crispy chicken rolled with ham & cheese, served with our signature creamy dip.", "img":"https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=600&q=80", "pairing": "built for the creamy dip"},
-  {"id":8, "name":"Polvoron Assorted (5 pcs)", "cat":"Cookies", "price":2.00, "rating":4.7, "desc":"Buttery toasted-flour shortbread that melts in your mouth. Best pasalubong box.", "img":"https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=80", "pairing": "the pasalubong-box hero"},
-  {"id":9, "name":"Ube Cheese Ensaymada", "cat":"Kakanin", "price":3.60, "rating":4.9, "desc":"Pillowy brioche swirled with real ube halaya, buttercream & grated cheese.", "img":"https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80", "pairing": "our #1 with kapeng barako"},
-  {"id":10, "name":"Mocha Chiffon Cake", "cat":"Cakes", "price":4.80, "rating":4.8, "desc":"Feather-light mocha chiffon with silky buttercream. Custom dedications free.", "img":"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80", "pairing": "a birthday-table regular"},
-  {"id":11, "name":"Ham & Cheese Pandesal (3 pcs)", "cat":"Savory", "price":3.40, "rating":4.7, "desc":"Toasted pandesal stuffed with ham & melted cheese. Served warm in 15 min.", "img":"https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80", "pairing": "warm, toasted, on the go"},
-  {"id":12, "name":"Ube Flan Cake Slice", "cat":"Chilled", "price":5.80, "rating":4.9, "desc":"Our showstopper: ube chiffon + leche flan + caramel. Wedding favorite.", "img":"https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=600&q=80", "pairing": "the wedding-table showstopper"},
+  {"id":2, "name":"Coconut Macaroons (30 pcs)", "cat":"Cookies", "price":150, "rating":4.8, "desc":"Golden Filipino coconut macaroons — crisp edges, chewy centers, baked hourly. 30 pieces per box.", "img":"./assets/macaroons.jpg", "pairing": "crisp with afternoon tea"},
+  {"id":3, "name":"Classic Leche Flan (Tub)", "cat":"Chilled", "price":100, "rating":4.9, "desc":"Silky caramel custard, slow-steamed the traditional way. Jiggly & rich. Sold per tub.", "img":"./assets/leche-flan.png", "pairing": "black coffee's best friend"},
+  {"id":4, "name":"Maja Blanca Tub", "cat":"Kakanin", "price":100, "rating":4.8, "desc":"Creamy coconut pudding with sweet corn, crowned with toasted latik crunch. Sold per tub.", "img":"./assets/maja-blanca.jpg", "pairing": "love it with toasted latik on top"},
+  {"id":5, "name":"Mango Float Tub", "cat":"Chilled", "price":100, "rating":4.9, "desc":"Layers of ripe mango, sweet cream & graham. Chilled overnight, sliced to order. Sold per tub.", "img":"./assets/mango-float.png", "pairing": "the cool-down after lunch"},
+  {"id":6, "name":"Classic Banana Cake (Tub)", "cat":"Cakes", "price":100, "rating":4.7, "desc":"Extra-moist banana cake with a caramelized golden top. Coffee's best friend. Sold per tub.", "img":"./assets/banana-cake.png", "pairing": "best beside a morning barako"},
+  {"id":7, "name":"Chicken Cordon Bleu", "cat":"Savory", "price":6.80, "rating":4.8, "desc":"Crispy chicken rolled with ham & cheese, served with our signature creamy dip. Temporarily unavailable.", "img":"./assets/chicken-cordon.jpg", "pairing": "built for the creamy dip", "available": False},
+  {"id":8, "name":"Polvoron Assorted (20 pcs)", "cat":"Cookies", "price":100, "rating":4.7, "desc":"Buttery toasted-flour shortbread that melts in your mouth. 20 pieces per box — the best pasalubong.", "img":"./assets/polvoron.jpg", "pairing": "the pasalubong-box hero"},
 ]
 
 cart = {}  # id -> qty
@@ -167,20 +163,33 @@ def render_menu():
     kinds = _menu_kinds(len(items))
     html = ""
     for idx, p in enumerate(items):
+        available = p.get("available", True)
         best = "<b class='card-best'> · Bestseller</b>" if p["rating"] >= 4.9 else ""
         kind = kinds[idx]
         open_cls = "card enter" if animate else "card"
         if kind != "card":
             open_cls += " card--" + kind
+        if not available:
+            open_cls += " card--unavailable"
         card_style = f' style="--i:{idx}"' if animate else ""
         extra = ""
         if kind == "banner" and p.get("pairing"):
             extra = "<p class='card-pairing'><b>Pair it with</b> — " + p["pairing"] + "</p>"
+        badge = "<span class='card-unavail'>Temporarily Unavailable</span>" if not available else ""
+        if available:
+            price_cls = "card-price"
+            price_html = money(p['price'])
+            add_btn = f'<button class="add-btn" data-id="{p["id"]}" py-click="add_to_cart" aria-label="Add {p["name"]} to basket">Add{plus}</button>'
+        else:
+            price_cls = "card-price card-price--unavailable"
+            price_html = "Temporarily Unavailable"
+            add_btn = f'<button class="add-btn" disabled aria-label="{p["name"]} is temporarily unavailable">Unavailable</button>'
         html += f"""
         <article class="{open_cls}"{card_style}>
           <button class="card-open" data-id="{p['id']}" py-click="open_dish" aria-label="View details of {p['name']}"></button>
           <div class="card-media">
             <img src="{p['img']}" alt="{p['name']}" loading="lazy" onerror="this.src='https://placehold.co/600x400/f7f1e5/40251c?text=Pastry'" />
+            {badge}
             <span class="card-view">View details{arrow}</span>
           </div>
           <div class="card-body">
@@ -193,8 +202,8 @@ def render_menu():
             {extra}
           </div>
           <div class="card-foot">
-            <span class="card-price">{money(p['price'])}</span>
-            <button class="add-btn" data-id="{p['id']}" py-click="add_to_cart" aria-label="Add {p['name']} to basket">Add{plus}</button>
+            <span class="{price_cls}">{price_html}</span>
+            {add_btn}
           </div>
         </article>
         """
@@ -265,10 +274,15 @@ def add_to_cart(event):
     pid = _clicked_card_id(event)
     if pid is None:
         return
+    p = next((x for x in PRODUCTS if x["id"] == pid), None)
+    if p is None:
+        return
+    if not p.get("available", True):
+        show_toast(f"{p['name']} is temporarily unavailable")
+        return
     cart[pid] = cart.get(pid, 0) + 1
     update_cart_ui()
-    name = next((p for p in PRODUCTS if p["id"]==pid), {"name":"treat"})
-    show_toast(f"Added {name['name']} · {sum(cart.values())} in basket")
+    show_toast(f"Added {p['name']} · {sum(cart.values())} in basket")
 
 def change_qty(event):
     target = getattr(event, "target", None)
@@ -457,7 +471,12 @@ def _dish_paint():
     node = _el("#dish-add")
     if node is not None:
         try:
-            node.innerHTML = "Add to basket · " + money(p["price"] * _dish_qty)
+            if p.get("available", True):
+                node.disabled = False
+                node.innerHTML = "Add to basket · " + money(p["price"] * _dish_qty)
+            else:
+                node.disabled = True
+                node.textContent = "Temporarily Unavailable"
         except Exception as err:
             js.console.warn(f"[HoneyBabe] dish label failed: {err}")
 
@@ -545,6 +564,9 @@ def add_dish_to_cart(event=None):
     if _dish_id is None:
         return
     p = _dish_by_id(_dish_id)
+    if not p.get("available", True):
+        show_toast(f"{p['name']} is temporarily unavailable")
+        return
     qty = _dish_qty
     cart[_dish_id] = cart.get(_dish_id, 0) + qty
     update_cart_ui()
@@ -553,10 +575,10 @@ def add_dish_to_cart(event=None):
     close_dish()
 
 def say_hello(event=None):
-    show_toast(f"Hello sweet tooth! {len(PRODUCTS)} fresh treats baked today.")
+    show_toast(f"Hello sweet tooth! {len(PRODUCTS)} treats on the menu today.")
 
 def chef_surprise(event=None):
-    p = random.choice(PRODUCTS)
+    p = random.choice([x for x in PRODUCTS if x.get("available", True)])
     _set_html(
         "#chef-output",
         "<svg class='ico' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z'/><path d='M6 17h12'/></svg>"
@@ -687,8 +709,16 @@ def _init(*_args):
     try:
         render_menu()
         update_cart_ui()
-        _set_html("#py-status", "<svg style='width:16px;height:16px;vertical-align:-3px;color:#1e7a44' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><polyline points='9 12 11 14 15 10'/></svg> <b>Fresh-bake system live!</b> Menu, basket & checkout are ready — 12 treats today.")
-        _set_text("#float-special", random.choice(PRODUCTS)["name"])
+        _set_html("#py-status", "<svg style='width:16px;height:16px;vertical-align:-3px;color:#1e7a44' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><polyline points='9 12 11 14 15 10'/></svg> <b>Fresh-bake system live!</b> Menu, basket & checkout are ready — " + str(len(PRODUCTS)) + " treats on the menu.")
+        pick = random.choice([x for x in PRODUCTS if x.get("available", True)])
+        _set_text("#float-special", pick["name"])
+        img = _el("#float-special-img")
+        if img is not None:
+            try:
+                img.setAttribute("src", pick["img"])
+                img.setAttribute("alt", pick["name"])
+            except Exception:
+                pass
     except Exception as err:
         try:
             js.console.error(f"[HoneyBabe] init failed: {err}")
