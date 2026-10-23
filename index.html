@@ -179,7 +179,7 @@
   .card{grid-column:span 4;background:#fff;border:2px solid var(--maroon-dark);border-radius:8px;overflow:hidden;box-shadow:var(--press);transition:transform .18s var(--ease-out),box-shadow .18s var(--ease-out);display:flex;flex-direction:column;position:relative}
   .card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 rgba(64,37,28,.16)}
   .card-media{position:relative;height:190px;overflow:hidden;background:#f3e6cf}
-  .card-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.6,.2,1)}
+  .card-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.6,.2,1)}
   .card:hover .card-media img{transform:scale(1.04)}
   .card-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
   .card-meta{display:flex;align-items:center;justify-content:space-between;gap:10px}
@@ -378,7 +378,7 @@
   .card--wide .card-body{padding:20px 22px 22px}
   .card--wide .card-body h3{font-size:1.9rem}
   .card--banner{grid-column:span 12;flex-direction:row;flex-wrap:wrap;border-radius:10px}
-  .card--banner .card-media{width:46%;height:auto;min-height:300px;border-right:2px solid var(--maroon-dark);background:#f6ead3}
+  .card--banner .card-media{width:46%;height:auto;min-height:320px;border-right:2px solid var(--maroon-dark);background:#f6ead3}
   .card--banner .card-body{width:54%;padding:26px 28px 18px;gap:10px;justify-content:center;align-self:stretch}
   .card--banner .card-body h3{font-size:2.4rem;line-height:1.04}
   .card--banner .card-foot{width:100%;padding:16px 28px}
