@@ -656,15 +656,12 @@ def submit_review(event=None):
         return
     safe_name = html.escape(name[:40])
     safe_msg = html.escape(msg[:400])
-    initials = "".join(w[0] for w in safe_name.split()[:2]).upper() or "HB"
     card = (
-        "<div class='testi testi--open t-new' aria-label='Newest customer review'>" +
-        _review_stars_html(n) +
-        "<span class='sr-only'>" + str(n) + " out of 5 stars</span>" +
-        "<p class='testi-quote'>\u201c" + safe_msg + "\u201d</p>" +
-        "<div class='who'><span class='mono'>" + initials + "</span><div class='who-txt'><b>" + safe_name + "</b>" +
-        "<span class='verified'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg> Customer review</span></div>" +
-        "<span class='doc-tag'>Just posted</span></div></div>"
+        "<div class='testi'>" + _review_stars_html(n) +
+        "<p>\u201c" + safe_msg + "\u201d</p>" +
+        "<div class='who'><div><b>" + safe_name + "</b><br>" +
+        "<span class='verified'><svg style='width:12px;height:12px;vertical-align:-1px' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg> " +
+        str(n) + "-star review</span></div></div></div>"
     )
     grid = _el(".testi-grid")
     if grid is None:
