@@ -259,19 +259,19 @@
   .craft .mini-stats b{font-family:var(--display);font-size:1.5rem;color:var(--gold);font-weight:700}
   /* testimonials */
   /* review ledger — Swiss scoreboard + asymmetric wall */
-  .score-strip{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:28px 46px;background:var(--card);border:2px solid var(--maroon-dark);border-radius:8px;box-shadow:var(--press);padding:28px 34px;margin-top:34px;align-items:center}
-  .score-primary{display:flex;flex-direction:column;gap:12px}
+  .score-strip{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:26px 40px;background:var(--card);border:2px solid var(--maroon-dark);border-radius:8px;box-shadow:var(--press);padding:28px 34px;margin-top:34px;align-items:stretch}
+  .score-primary{display:flex;flex-direction:column;gap:12px;justify-content:center}
   .score-num{font-family:var(--display);font-weight:600;font-size:4.4rem;line-height:.82;letter-spacing:-.02em;color:var(--maroon-dark)}
   .score-primary .stars-ico{color:var(--orange-deep)}
   .score-lab{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--maroon)}
-  .score-bars{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+  .score-bars{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;justify-content:center;min-width:0}
   .score-bars li{display:grid;grid-template-columns:30px minmax(0,1fr) 44px;align-items:center;gap:12px}
   .score-bars .lab{font-size:.7rem;font-weight:800;letter-spacing:.06em;color:var(--maroon);white-space:nowrap}
   .score-bars .bar{height:11px;background:var(--cream);border:1px solid rgba(64,37,28,.3);border-radius:2px;overflow:hidden}
   .score-bars .bar i{display:block;height:100%;background:var(--orange)}
   .score-bars li:first-child .bar i{background:var(--orange-deep)}
   .score-bars .val{font-size:.74rem;font-weight:800;color:var(--ink);text-align:right}
-  .score-facts{display:flex;flex-direction:column;border-left:2px solid rgba(64,37,28,.22);padding-left:26px;min-width:225px}
+  .score-facts{margin:0;display:flex;flex-direction:column;justify-content:center;border-left:2px solid rgba(64,37,28,.22);padding-left:26px;min-width:225px}
   .score-facts div{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid rgba(64,37,28,.14)}
   .score-facts div:last-child{border-bottom:none}
   .score-facts dt{font-size:.66rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--maroon)}
@@ -301,6 +301,7 @@
   .doc-tag{margin-left:auto;flex:none;font-size:.62rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--maroon-dark);background:var(--orange-soft);border:1px solid var(--bd);border-radius:3px;padding:5px 9px;white-space:nowrap}
   /* customer feedback */
   .feedback-panel{background:var(--card);border:2px solid var(--maroon-dark);border-radius:8px;padding:30px;box-shadow:var(--press);margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+  .feedback-panel>div:first-child{border-right:2px solid rgba(64,37,28,.14);padding-right:26px}
   .feedback-panel h3{margin:0 0 6px;color:var(--maroon-dark);font-size:1.3rem}
   .feedback-panel p.sub{margin:0 0 14px;color:var(--muted);font-size:.93rem}
   .star-input{display:flex;gap:6px;margin:8px 0 4px}
@@ -312,7 +313,7 @@
   #feedback-form label{margin-top:10px}
   #fb-msg{min-height:90px;resize:vertical}
   .feedback-list-note{font-size:.85rem;color:var(--muted);margin-top:10px}
-  @media(max-width:900px){.feedback-panel{grid-template-columns:1fr}}
+  @media(max-width:900px){.feedback-panel{grid-template-columns:1fr}.feedback-panel>div:first-child{border-right:none;padding-right:0}}
   /* gallery */
   .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:34px}
   .gallery img{height:230px;width:100%;object-fit:cover;border-radius:110px 110px 6px 6px;border:2px solid var(--maroon-dark);box-shadow:var(--press);transition:transform .18s var(--ease-out),box-shadow .18s var(--ease-out)}
@@ -424,10 +425,11 @@
     .props{grid-template-columns:1fr 1fr}
     .testi--feature,.testi--open.t-high{grid-column:span 12}
     .t-side,.testi--open.t-half{grid-column:span 6}
-    .score-strip{grid-template-columns:auto minmax(0,1fr)}
+    .score-strip{gap:18px 28px;padding:22px 26px}
     .score-num{font-size:3.4rem}
-    .score-facts{grid-column:1/-1;border-left:none;border-top:2px solid rgba(64,37,28,.18);padding:14px 0 2px;flex-direction:row;flex-wrap:wrap;gap:4px 34px;min-width:0;justify-self:stretch}
-    .score-facts div{border-bottom:none;padding:2px 0}
+    .score-facts{min-width:196px;padding-left:20px}
+    .score-facts dd{font-size:.96rem}
+    .testi-grid{gap:20px 24px}
     .gallery{grid-template-columns:1fr 1fr}
     .foot{grid-template-columns:1fr 1fr}
     .card,.card--wide{grid-column:span 6}
@@ -448,8 +450,12 @@
     #fc1{left:8px}#fc2{right:8px}
     .testi-grid{grid-template-columns:1fr}
     .testi-grid .testi{grid-column:1/-1}
-    .score-strip{grid-template-columns:1fr;align-items:start}
+    .score-strip{grid-template-columns:1fr;align-items:stretch;gap:18px;padding:22px 24px}
     .score-num{font-size:4.2rem}
+    .score-bars,.score-primary{justify-content:flex-start}
+    .score-facts{border-left:none;border-top:2px solid rgba(64,37,28,.18);padding:16px 2px 2px;min-width:0}
+    .score-facts div{padding:10px 2px}
+    .score-facts div:last-child{border-bottom:none}
     .menu-search{width:100%;min-width:0}    .foot{grid-template-columns:1fr}
     .props{grid-template-columns:1fr}
     section{padding:60px 0}
@@ -651,7 +657,7 @@
       <span class="score-num">4.9</span>
       <span class="stars-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
       <span class="sr-only">Rated 4.9 out of 5 stars</span>
-      <span class="score-lab">Average · 2,314 verified reviews</span>
+      <span class="score-lab">Average rating</span>
     </div>
     <ul class="score-bars" aria-label="Rating distribution">
       <li><span class="lab">5 ★</span><span class="bar" aria-hidden="true"><i style="width:92%"></i></span><span class="val">92%</span></li>
